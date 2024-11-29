@@ -9,15 +9,22 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
+            statusId: {
+                type: Sequelize.STRING
+            },
             doctorId: {
                 type: Sequelize.INTEGER
             },
             patientId: {
                 type: Sequelize.INTEGER
             },
-            description: {
-                type: Sequelize.TEXT
+            date: {
+                type: Sequelize.DATE
             },
+            timeType: {
+                type: Sequelize.STRING
+            },
+
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE
