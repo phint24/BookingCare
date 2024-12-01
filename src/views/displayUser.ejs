@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>All Users</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>All Users</h2>
+        <table class="table table-hover" style="border: solid black;">
+            <thead>
+                <tr>
+                    <th>User Id</th>
+                    <th>User Name</th>
+                    <th>Gender</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Address</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i=0;i<dataTable.length; i++) { %>
+                    <tr>
+                        <td>
+                            <%= dataTable[i].userId %>
+                        </td>
+                        <td>
+                            <%= dataTable[i].userName %>
+                        </td>
+                        <td>
+                            <%= dataTable[i].gender %>
+                        </td>
+                        <td>
+                            <%= dataTable[i].email %>
+                        </td>
+                        <td>
+                            <%= dataTable[i].phoneNumber %>
+                        </td>
+                        <td>
+                            <%= dataTable[i].address %>
+                        </td>
+                        <td style="display: inline-block;">
+                            <a href="/edit-crud?id=<%=dataTable[i].userId%>">Edit</a>
+                            <p>/</p>
+                            <a href="">Delete</a>
+                        </td>
+                    </tr>
+                    <% } %>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>
