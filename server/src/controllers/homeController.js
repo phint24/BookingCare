@@ -1,5 +1,5 @@
 import express from "express";
-import { createUser, getAllUser, getUserById, updateUser } from "../services/CRUDService"
+import { createUser, getAllUser, getUserById, updateUser, deleteUser } from "../services/CRUDService"
 
 const getHomePage = (req, res) => {
     return res.render('homepage.ejs')
@@ -39,4 +39,14 @@ const putCRUD = async (req, res) => {
     return res.render('displayUser.ejs', { dataTable: allUsers })
 }
 
-export { getHomePage, getCRUD, postCRUD, displayGetCRUD, getEditCRUD, putCRUD };
+const deleteCRUD = async (req, res) => {
+    const id = req.query.id;
+    if (id) {
+        const newData = await deleteUser(id);
+        return res.render('displayUser.ejs', { dataTable: newData })
+    } else {
+        return res.send('Id not found!');
+    }
+}
+
+export { getHomePage, getCRUD, postCRUD, displayGetCRUD, getEditCRUD, putCRUD, deleteCRUD };
