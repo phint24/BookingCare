@@ -37,24 +37,72 @@ const hashUserPassword = (password) => {
     });
 }
 
+// const getAllUser = () => {
+//     return new Promise(async (resolve, reject) => {
+//         try {
+//             const users = await db.User.findAll({
+//                 attributes: ['email', 'password', 'userName', 'phoneNumber', 'address', 'gender', 'roleId'],
+//                 raw: true
+//             });
+
+//             if (users) {
+//                 users.errCode = 0;
+//                 users.message = "Fetch all users succeed!";
+//                 delete users.password;
+//             }
+
+//             const processedUsers = users.map(users => ({
+//                 ...users,
+//                 gender: user.gender === true ? "Nữ" : "Nam"
+//             }))
+
+//             resolve(processedUsers);
+//         } catch (e) {
+//             reject(e);
+//         }
+//     })
+// }
+
 const getAllUser = () => {
     return new Promise(async (resolve, reject) => {
         try {
             const users = await db.User.findAll({
+                attributes: ['userId', 'email', 'password', 'userName', 'phoneNumber', 'address', 'gender', 'roleId'],
                 raw: true
             });
 
-            const processedUsers = users.map(users => ({
-                ...users,
-                gender: user.gender === true ? "Nữ" : "Nam"
-            }))
+            if (users) {
+                const processedUsers = users.map(user => ({
+                    ...user,
+                    gender: user.gender === true ? "Nữ" : "Nam",
+                }));
+                const result = processedUsers.map(user => {
+                    const { password, ...userWithoutPassword } = user;
+                    return userWithoutPassword;
+                });
 
-            resolve(processedUsers);
+                resolve({
+                    errCode: 0,
+                    message: "Fetch all users succeed!",
+                    data: result
+                });
+            } else {
+                resolve({
+                    errCode: 1,
+                    message: "No users found!",
+                    data: []
+                });
+            }
         } catch (e) {
-            reject(e);
+            reject({
+                errCode: -1,
+                message: "Error fetching users",
+                error: e.message
+            });
         }
-    })
-}
+    });
+};
+
 
 const getUserById = (id) => {
     return new Promise(async (resolve, reject) => {
@@ -76,14 +124,15 @@ const getUserById = (id) => {
 }
 
 const updateUser = (data) => {
+    console.log("check id: ", data.data.userId)
     return new Promise(async (resolve, reject) => {
         try {
-            if (!data.userId) {
+            if (!data.data.userId) {
                 console.log("User not found!")
             };
 
             const user = await db.User.findOne({
-                where: { userId: data.userId }
+                where: { userId: data.data.userId }
             });
 
             if (user) {
@@ -96,14 +145,14 @@ const updateUser = (data) => {
                 // }, {
                 //     where: { userId: data.userId }
                 // });
-                user.userName = data.userName;
-                user.email = data.email;
-                user.phoneNumber = data.phoneNumber;
-                user.address = data.address;
-                user.gender = data.gender;
+                user.userName = data.data.userName;
+                user.email = data.data.email;
+                user.phoneNumber = data.data.phoneNumber;
+                user.address = data.data.address;
+                user.gender = data.data.gender;
 
                 await user.save();
-
+                console.log("new data", user)
                 const allUsers = await db.User.findAll({
                     raw: true
                 });
@@ -120,17 +169,29 @@ const updateUser = (data) => {
 }
 
 const deleteUser = (id) => {
+    console.log('check id at CRUDservice: ', id);
     return new Promise(async (resolve, reject) => {
         try {
             const getUser = await db.User.findOne({ where: { userId: id } });
             if (getUser) {
                 await getUser.destroy();
+                resolve({
+                    errCode: 0,
+                    message: "Delete user succeed!"
+                })
             } else {
-                resolve("User not found!")
+                resolve({
+                    errCode: 1,
+                    message: "User not found!"
+                })
             }
 
         } catch (e) {
-            reject(e);
+            reject({
+                errCode: -1,
+                message: "Error deleting user",
+                error: e.message
+            });
         }
     })
 }

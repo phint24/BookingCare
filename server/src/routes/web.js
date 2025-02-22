@@ -1,6 +1,6 @@
 import express from "express";
 import { getHomePage, getCRUD, postCRUD, displayGetCRUD, getEditCRUD, putCRUD, deleteCRUD } from "../controllers/homeController";
-import { handleLogin } from "../controllers/userController";
+import { handleLogin, handleSignUp, handleFetchAllDoctors, handleDeleteDoctor, handleEditDoctor, handleAddNewUser, getAllCode } from "../controllers/userController";
 const router = express.Router();
 
 const initWebRoutes = (app) => {
@@ -15,6 +15,13 @@ const initWebRoutes = (app) => {
     router.get("/delete-crud", deleteCRUD);
 
     router.post("/api/login", handleLogin);
+    router.post("/api/sign-up", handleSignUp);
+    router.get("/api/doctors", handleFetchAllDoctors);
+    router.delete("/api/delete-doctor", handleDeleteDoctor);
+    router.put("/api/edit-doctor", handleEditDoctor);
+    router.post("/api/create-user", handleAddNewUser);
+
+    router.get("/api/allcode", getAllCode)
 
     return app.use("/", router);
 }

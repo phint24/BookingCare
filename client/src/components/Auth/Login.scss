@@ -6,18 +6,13 @@ $text-color: #333;
 $border-color: #ddd;
 $shadow-color: rgba(0, 0, 0, 0.1);
 
-body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-image: url('../../assets/images/backgorund.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
 // Main container
 .login-container {
+    margin: 0;
+    padding: 0;
+    background-image: url('../../assets/images/backgorund.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
     width: 100%;
     min-height: 100vh;
     height: 100%;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { handleUserLogin } from '../../service/userService';
+import { handleLoginAPI, handleSignUpAPI } from '../../service/userService';
 import { userLoginSuccess } from '../../store/actions/userAction';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
@@ -32,6 +32,12 @@ class Login extends Component {
         }));
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.isLoggedIn !== this.props.isLoggedIn) {
+            console.log('isLoggedIn has changed to:', this.props.isLoggedIn);
+        }
+    }
+
     handleOnChangeInput = (e) => {
         // console.log(e.target.value);
         const { name, value } = e.target;
@@ -46,11 +52,14 @@ class Login extends Component {
             errorMessage: '',
         });
         try {
-            const userData = await handleUserLogin(this.state.email, this.state.password);
+            const userData = await handleLoginAPI(this.state.email, this.state.password);
 
             if (userData.errCode === 0) {
                 this.props.userLoginSuccess(userData.user);
-                console.log(userData);
+                console.log("userData", userData.user);
+                this.setState({
+                    isLoginForm: true,
+                });
                 this.props.navigate('/');
             }
         } catch (error) {
@@ -65,16 +74,29 @@ class Login extends Component {
     }
 
     handleSignUp = async (e) => {
-        console.log(this.state.userName);
-        console.log(this.state.email);
-        console.log(this.state.password);
+        e.preventDefault();
+        this.setState({
+            errorMessage: '',
+        });
+        try {
+            const userData = await handleSignUpAPI(this.state.email, this.state.password, this.state.userName);
+            console.log('check sign up', userData);
+            this.props.navigate('/login');
+        } catch (error) {
+            console.log(error);
+            if (error.response.data) {
+                this.setState({
+                    errorMessage: error.response.data.message,
+                });
+            }
+        }
     }
 
-    // handleShowHidePassword = () => {
-    //     this.setState(preState => ({
-    //         isShowPassword: !preState.isShowPassword
-    //     }));
-    // }
+    handleShowHidePassword = () => {
+        this.setState(preState => ({
+            isShowPassword: !preState.isShowPassword
+        }));
+    }
 
     render() {
         const { isLoginForm, email, password, userName } = this.state;
@@ -127,7 +149,7 @@ class Login extends Component {
                             </div>
                         </form>
                     ) : (
-                        <form onSubmit={this.handleSubmit}>
+                        <form onSubmit={this.handleSignUp}>
                             <div className="form-group">
                                 <input className="form-control"
                                     type="text"
@@ -155,6 +177,13 @@ class Login extends Component {
                                     placeholder="Enter your password"
                                 />
                             </div>
+                            {/* <div className="form-group">
+                        <label>Gender</label>
+                                <select>
+                                    <option value="1">Male</option>
+                                    <option value="0">Female</option>
+                                </select>
+                            </div> */}
                             <button type="submit" className="submit-btn signup" onClick={this.handleSignUp}>Sign up</button>
                         </form>
                     )}
@@ -167,7 +196,7 @@ class Login extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        started: state.app.started,
+        // started: state.app.started,
         isLoggedIn: state.user.isLoggedIn,
     }
 }
@@ -176,7 +205,10 @@ const mapDispatchToProps = (dispatch) => {
     return {
         navigate: (path) => dispatch(push(path)),
         // userLoginFail: () => dispatch(userLoginFail()),
-        userLoginSuccess: (userData) => dispatch(userLoginSuccess(userData)),
+        userLoginSuccess: (userData) => {
+            console.log("check isLoggedIn at map state: ", userData);
+            dispatch(userLoginSuccess(userData));
+        }
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withNavigate(Login));

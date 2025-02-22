@@ -2,7 +2,7 @@ import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
-import appReducer from './userReducer';
+import userReducer from './userReducer';
 
 const persistCommonConfig = {
     key: 'user',
@@ -18,7 +18,7 @@ const userPersistConfig = {
 const rootReducer = (history) => combineReducers({
     router: connectRouter(history),
     user: persistReducer(userPersistConfig, userReducer),
-    app: appReducer
+    app: userReducer
 })
 
 export default rootReducer;

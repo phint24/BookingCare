@@ -1,0 +1,236 @@
+.doctor-display-container {
+    font-family: Calibri, sans-serif;
+
+    // .doctor-display-table {
+
+    //     h2 {
+    //         display: flex;
+    //         justify-content: center;
+    //         align-items: center;
+    //         margin: 15px;
+    //         color: #20b6a9;
+    //     }
+
+    //     .add-btn {
+    //         margin: 15px;
+    //         padding: 10px;
+    //         background-color: #20b6a9;
+    //         border: none;
+    //         border-radius: 5px;
+    //         width: 150px;
+    //         height: 35px;
+    //         color: white;
+    //         font-weight: 600;
+    //         cursor: pointer;
+    //         transition: transform 0.4s ease, width 0.4s ease, height 0.4s ease;
+
+    //         .fa-plus {
+    //             margin-right: 5px;
+    //             font-size: 16px;
+    //         }
+
+    //         &:hover {
+    //             background-color: #178a7d;
+    //             transform: scale(1.05);
+    //             box-shadow: 0 0 10px rgba(0, 0, 0, 0.202);
+    //         }
+    //     }
+
+    //     table {
+    //         font-family: arial, sans-serif;
+    //         border-collapse: collapse;
+    //         width: 98%;
+    //         margin: 15px;
+
+    //         td,
+    //         th {
+    //             border: 1px solid #dddd;
+    //             text-align: center;
+    //             padding: 8px;
+
+    //         }
+
+    //         tr:nth-child(even) {
+    //             background-color: #d7f7f4;
+    //         }
+
+    //         .action-button {
+    //             margin: 5px;
+    //             background-color: #20b6a9;
+    //             border: none;
+    //             border-radius: 5px;
+    //             width: 30px;
+    //             height: 30px;
+    //             padding: 5px;
+    //             color: white;
+    //             cursor: pointer;
+    //             transition: transform 0.4s ease, width 0.4s ease, height 0.4s ease;
+
+    //             &:hover {
+    //                 background-color: #178a7d;
+    //                 transform: scale(1.05);
+    //                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.202);
+    //             }
+    //         }
+    //     }
+
+
+    // }
+
+    .doctor-content-1 {
+        display: flex;
+        justify-content: center;
+
+        .top-doctor {
+            width: 100%;
+
+
+            .title {
+                font-size: 40px;
+                color: #20b6a9;
+                font-weight: bold;
+                margin-top: 1vh;
+                margin-bottom: 5vh;
+                display: flex;
+                justify-content: center;
+
+            }
+
+            .doctor-banner {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                width: 100%;
+                max-width: 100%;
+                flex-wrap: wrap;
+                gap: 3vw;
+
+                .doctor-info {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    border: 1px solid #2b9ddf;
+                    border-radius: 20px;
+                    background-color: #2b9ddf;
+                    width: 20vw;
+                    height: 45vh;
+                    margin-top: 5vh;
+                    transition: transform 0.4s ease, width 0.4s ease, height 0.4s ease;
+                    box-shadow: 6px 6px 12px #2b9ddf88, -6px -6px 12px #2b9ddf88;
+
+                    &:hover {
+                        transform: scale(1.05);
+                    }
+
+                    .doctors-image {
+                        display: flex;
+                        justify-content: center;
+
+                        width: 100%;
+                        height: 75%;
+                    }
+
+                    .doctors-name,
+                    .doctors-speciality {
+                        display: flex;
+                        justify-content: center;
+                        padding-top: 1vh;
+                        font-size: 16px;
+                        font-weight: 600;
+
+                        .main-title-2 {
+                            color: white;
+                        }
+                    }
+
+                    .doctors-name {
+                        font-size: 22px;
+                    }
+                }
+            }
+
+        }
+    }
+
+    hr {
+        margin-top: 5vh;
+        width: 95%;
+    }
+
+    .doctor-content-2 {
+        display: flex;
+        justify-content: center;
+
+        .top-doctor {
+            width: 100%;
+
+
+            .title {
+                font-size: 40px;
+                color: #20b6a9;
+                font-weight: bold;
+                margin-top: 1vh;
+                margin-bottom: 5vh;
+                display: flex;
+                justify-content: center;
+
+            }
+
+            .doctor-banner {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                width: 100%;
+                max-width: 100%;
+                flex-wrap: wrap;
+                gap: 3vw;
+
+                .doctor-info {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    border: 1px solid #2b9ddf;
+                    border-radius: 20px;
+                    background-color: #2b9ddf;
+                    width: 20vw;
+                    height: 45vh;
+                    margin-top: 5vh;
+                    transition: transform 0.4s ease, width 0.4s ease, height 0.4s ease;
+                    box-shadow: 6px 6px 12px #2b9ddf88, -6px -6px 12px #2b9ddf88;
+
+                    &:hover {
+                        transform: scale(1.05);
+                    }
+
+                    .doctors-image {
+                        display: flex;
+                        justify-content: center;
+
+                        width: 100%;
+                        height: 75%;
+                    }
+
+                    .doctors-name,
+                    .doctors-speciality {
+                        display: flex;
+                        justify-content: center;
+                        padding-top: 1vh;
+                        font-size: 16px;
+                        font-weight: 600;
+
+                        .main-title-2 {
+                            color: white;
+                        }
+                    }
+
+                    .doctors-name {
+                        font-size: 22px;
+                    }
+                }
+            }
+
+        }
+    }
+}
